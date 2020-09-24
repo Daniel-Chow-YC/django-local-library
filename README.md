@@ -51,3 +51,34 @@ INSTALLED_APPS = [
 ]
 ````
 
+## Testing the website framework
+
+###  Running database migrations 
+- Django uses an Object-Relational-Mapper (ORM) to map model definitions in the Django code to the data structure used by the underlying database. As we change our model definitions, Django tracks the changes and can create database migration scripts (in /locallibrary/catalog/migrations/) to automatically migrate the underlying data structure in the database to match the model.
+- Run the following commands to define tables for those models in the database:
+````
+python3 manage.py makemigrations
+python3 manage.py migrate
+````
+
+### Running the website
+- Run the development web server by calling the ``runserver`` command:
+- ``python3 manage.py runserver``
+
+## Django Admin Site
+
+### Registering Models
+- Open admin.py
+- Then import the models and call ``admin.site.register`` to register the models:
+````
+from .models import Author, Genre, Book, BookInstance
+
+admin.site.register(Book)
+admin.site.register(Author)
+admin.site.register(Genre)
+admin.site.register(BookInstance)
+
+````
+
+### Creating a superuser
+``python3 manage.py createsuperuser``
