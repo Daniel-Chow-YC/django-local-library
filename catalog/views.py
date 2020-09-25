@@ -34,6 +34,7 @@ def index(request):
 # ---------------------book page class view -----------------------
 class BookListView(generic.ListView):
     model = Book
+    paginate_by = 10
 
 # ---------------------book detail view -----------------------
 class BookDetailView(generic.DetailView):
