@@ -54,3 +54,55 @@ class AuthorListView(generic.ListView):
 # ---------------------author detail view -----------------------
 class AuthorDetailView(generic.DetailView):
     model = Author
+
+# ---------------------on loan view -----------------------
+from django.contrib.auth.mixins import LoginRequiredMixin
+
+class LoanedBooksByUserListView(LoginRequiredMixin,generic.ListView):
+    """Generic class-based view listing books on loan to current user."""
+    model = BookInstance
+    template_name ='catalog/bookinstance_list_borrowed_user.html'
+    paginate_by = 10
+    
+    def get_queryset(self):
+        return BookInstance.objects.filter(borrower=self.request.user).filter(status__exact='o').order_by('due_back')
+
+# --------------------- all loaned books view ---------------------
+from django.contrib.auth.mixins import PermissionRequiredMixin
+
+class LoanedBooksAllBooksListView(PermissionRequiredMixin,generic.ListView):
+    """Generic class-based view listing all books on loan. Only visible to users with can_mark_returned permission."""
+    permission_required = 'catalog.can_mark_returned'
+    model = BookInstance
+    template_name ='catalog/bookinstance_list_all_loaned_books.html'
+    paginate_by = 10
+    
+    def get_queryset(self):
+        return BookInstance.objects.filter(status__exact='o').order_by('due_back')
+
+
+# ## for function based view:
+# from django.contrib.auth.decorators import permission_required
+
+# @permission_required('catalog.can_mark_returned')
+# def my_view(request):
+#     ...
+
+
+# ---------------------Testing against authenticated users---------------------
+## for function-based views, the easiest way to restrict access to your functions is to apply the login_required decorator to your view function
+
+# from django.contrib.auth.decorators import login_required
+
+# @login_required
+# def my_view(request):
+#     ...
+
+
+## the easiest way to restrict access to logged-in users in your class-based views is to derive from LoginRequiredMixin. You need to declare this mixin first in the superclass (parent class) list, before the main view class.
+
+# from django.contrib.auth.mixins import LoginRequiredMixin
+
+# class MyView(LoginRequiredMixin, View):
+#     login_url = '/login/'
+#     redirect_field_name = 'redirect_to'
