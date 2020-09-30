@@ -1,5 +1,10 @@
 # Django Project: Local Library
 
+## Logins for App
+````
+username: user1                 |         username: librarian1                    
+password: user1password         |         password: user1password
+````
 ## Setting up a Django development environment
 
 ### Using Django inside a Python virtual environment
@@ -100,3 +105,6 @@ The easiest way to run all the tests is to use the command:
 
  ### Running a Specific test
  - ``python3 manage.py test catalog.tests.test_models.YourTestClass``
+
+ ## Requirements
+ ``pip3 freeze > requirements.txt``
