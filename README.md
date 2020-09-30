@@ -1,9 +1,10 @@
 # Django Project: Local Library
 
-## Access Project
-Access online at: https://arcane-dusk-63151.herokuapp.com/catalog/
+## Project
+- Create a local library app using django.
+- Access online at: https://arcane-dusk-63151.herokuapp.com/catalog/
 
-## Logins for App
+### Logins for App
 ````
 username: user1                 |         username: librarian1                    
 password: user1password         |         password: user1password
