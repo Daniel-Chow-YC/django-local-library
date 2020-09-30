@@ -82,3 +82,21 @@ admin.site.register(BookInstance)
 
 ### Creating a superuser
 ``python3 manage.py createsuperuser``
+
+## Testing a Django Web Application
+
+The easiest way to run all the tests is to use the command:
+``python3 manage.py test``
+- This will discover all files named with the pattern test*.py under the current directory and run all tests defined using appropriate base classes
+ <br>
+ 
+ - If you get errors similar to: ``ValueError: Missing staticfiles manifest entry ...`` this may be because testing does not run collectstatic by default and your app is using a storage class that requires it 
+ - There are a number of ways you can overcome this problem - the easiest is to simply run collectstatic before running the tests:
+ - ``python3 manage.py collectstatic``
+
+ ### Showing more test information
+ - ``python3 manage.py test --verbosity=2``
+ - The allowed verbosity levels are 0, 1, 2, and 3, with the default being "1".
+
+ ### Running a Specific test
+ - ``python3 manage.py test catalog.tests.test_models.YourTestClass``
